@@ -10,7 +10,7 @@ const createProduct = (newProduct) => {
             if (checkProduct !== null) {
                 resolve({
                     status: 'ERR',
-                    message: 'The name of product is already'
+                    message: 'Tên sản phẩm đả có đả tồn tại !'
                 })
             }
             const newProduct = await Product.create({
@@ -26,7 +26,7 @@ const createProduct = (newProduct) => {
             if (newProduct) {
                 resolve({
                     status: 'OK',
-                    message: 'SUCCESS',
+                    message: 'Thành công !',
                     data: newProduct
                 })
             }

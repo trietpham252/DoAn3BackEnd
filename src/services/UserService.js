@@ -12,7 +12,7 @@ const createUser = (newUser) => {
             if (checkUser !== null) {
                 resolve({
                     status: 'ERR',
-                    message: 'The email is already'
+                    message: 'Email đả tồn tại trong hệ thống !'
                 })
             }
             const hash = bcrypt.hashSync(password, 10)
@@ -25,7 +25,7 @@ const createUser = (newUser) => {
             if (createdUser) {
                 resolve({
                     status: 'OK',
-                    message: 'SUCCESS',
+                    message: 'Đăng ký thành công !',
                     data: createdUser
                 })
             }
@@ -45,7 +45,7 @@ const loginUser = (userLogin) => {
             if (checkUser === null) {
                 resolve({
                     status: 'ERR',
-                    message: 'The user is not defined'
+                    message: 'Email không tồn tại, hãy đăng ký trước nhé !'
                 })
             }
             const comparePassword = bcrypt.compareSync(password, checkUser.password)
@@ -53,7 +53,7 @@ const loginUser = (userLogin) => {
             if (!comparePassword) {
                 resolve({
                     status: 'ERR',
-                    message: 'The password or user is incorrect'
+                    message: 'Email và mật khẩu không đúng'
                 })
             }
             const access_token = await genneralAccessToken({
@@ -68,7 +68,7 @@ const loginUser = (userLogin) => {
 
             resolve({
                 status: 'OK',
-                message: 'SUCCESS',
+                message: 'Đăng nhập thành công !',
                 access_token,
                 refresh_token
             })
@@ -87,14 +87,14 @@ const updateUser = (id, data) => {
             if (checkUser === null) {
                 resolve({
                     status: 'ERR',
-                    message: 'The user is not defined'
+                    message: 'Người dùng không tồn tại'
                 })
             }
 
             const updatedUser = await User.findByIdAndUpdate(id, data, { new: true })
             resolve({
                 status: 'OK',
-                message: 'SUCCESS',
+                message: 'Cập nhật thành công',
                 data: updatedUser
             })
         } catch (e) {
@@ -112,14 +112,14 @@ const deleteUser = (id) => {
             if (checkUser === null) {
                 resolve({
                     status: 'ERR',
-                    message: 'The user is not defined'
+                    message: 'Người dùng không tồn tại !'
                 })
             }
 
             await User.findByIdAndDelete(id)
             resolve({
                 status: 'OK',
-                message: 'Delete user success',
+                message: 'Xóa người dùng thành công !',
             })
         } catch (e) {
             reject(e)
@@ -134,7 +134,7 @@ const deleteManyUser = (ids) => {
             await User.deleteMany({ _id: ids })
             resolve({
                 status: 'OK',
-                message: 'Delete user success',
+                message: 'Xóa người dùng thành công !',
             })
         } catch (e) {
             reject(e)
@@ -148,7 +148,7 @@ const getAllUser = () => {
             const allUser = await User.find().sort({createdAt: -1, updatedAt: -1})
             resolve({
                 status: 'OK',
-                message: 'Success',
+                message: 'Thành công !',
                 data: allUser
             })
         } catch (e) {
@@ -166,12 +166,12 @@ const getDetailsUser = (id) => {
             if (user === null) {
                 resolve({
                     status: 'ERR',
-                    message: 'The user is not defined'
+                    message: 'Người dùng không tồn tại !'
                 })
             }
             resolve({
                 status: 'OK',
-                message: 'SUCESS',
+                message: 'Thành công !',
                 data: user
             })
         } catch (e) {

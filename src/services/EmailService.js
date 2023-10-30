@@ -18,10 +18,27 @@ const sendEmailCreateOrder = async (email,orderItems) => {
   let listItem = '';
   const attachImage = []
   orderItems.forEach((order) => {
-    listItem += `<div>
+    listItem += `<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333333;">
     <div>
-      Bạn đã đặt sản phẩm <b>${order.name}</b> với số lượng: <b>${order.amount}</b> và giá là: <b>${order.price} VND</b></div>
-      <div>Bên dưới là hình ảnh của sản phẩm</div>
+      <p style="margin-bottom: 10px;">
+        <strong>Tên sản phẩm:</strong> <span style="font-weight: bold;">${order.name}</span><br>
+        <strong>Số lượng:</strong> <span style="font-weight: bold;">${order.amount}</span><br>
+        <strong>Giá:</strong> <span style="font-weight: bold;">${order.price} VND</span>
+      </p>
+      <p style="margin-bottom: 10px;">
+        Chúng tôi xin cam đoan rằng đơn hàng của bạn sẽ được xử lý và gữi về cho bạn trong thời gian sớm nhất có thể. Bạn sẽ nhận được thông báo cập nhật về tiến trình đơn hàng qua email.
+      </p>
+      <p style="margin-bottom: 10px;">
+        Nếu bạn có bất kỳ câu hỏi hoặc cần hỗ trợ thêm, vui lòng liên hệ với đội ngũ chăm sóc khách hàng của chúng tôi. Chúng tôi luôn sẵn lòng giúp đỡ bạn.
+      </p>
+      <p style="margin-bottom: 10px;">
+        Một lần nữa, chúng tôi xin chân thành cảm ơn sự lựa chọn của bạn và hy vọng rằng bạn sẽ hài lòng với sản phẩm mà bạn đã chọn từ Louis Vuitton.
+      </p>
+      <strong>Trân trọng,</strong><br>
+      Đội ngũ Louis Vuitton
+    </div>
+    <div style="margin-top: 20px;">
+      <p style="margin-bottom: 10px;">Dưới đây là hình ảnh của sản phẩm:</p>
     </div>`
     attachImage.push({path: order.image})
   })
@@ -30,9 +47,9 @@ const sendEmailCreateOrder = async (email,orderItems) => {
   let info = await transporter.sendMail({
     from: process.env.MAIL_ACCOUNT, // sender address
     to: email, // list of receivers
-    subject: "Bạn đã đặt hàng tại shop LẬP trình thật dễ", // Subject line
-    text: "Hello world?", // plain text body
-    html: `<div><b>Bạn đã đặt hàng thành công tại shop Lập trình thật dễ</b></div> ${listItem}`,
+    subject: "XÁC NHẬN ĐẶT HÀNG THÀNH CÔNG TẠI WEDSITE LOUIS VUITTON ", // Subject line
+    text: "Xin chào bạn", // plain text body
+    html: `<div><b>Chúng tôi xin gửi lời cảm ơn chân thành vì đã tin tưởng và đặt hàng trên website của LouisVuitton Chúng tôi đã nhận được thông tin chi tiết về đơn hàng của bạn, dưới đây là thông tin chi tiết sản phẩm bạn đã đặt:</b></div> ${listItem}`,
     attachments: attachImage,
   });
 }
