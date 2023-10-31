@@ -39,7 +39,7 @@ const loginUser = async (req, res) => {
         if (!email || !password) {
             return res.status(200).json({
                 status: 'ERR',
-                message: 'Tài khoản không tồn tại !'
+                message: 'Không được bỏ trống !'
             })
         } else if (!isCheckEmail) {
             return res.status(200).json({
