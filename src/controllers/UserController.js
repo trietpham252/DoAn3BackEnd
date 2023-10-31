@@ -9,17 +9,17 @@ const createUser = async (req, res) => {
         if (!email || !password || !confirmPassword) {
             return res.status(200).json({
                 status: 'ERR',
-                message: 'The input is required'
+                message: 'Vui lòng nhập đúng định dạng !'
             })
         } else if (!isCheckEmail) {
             return res.status(200).json({
                 status: 'ERR',
-                message: 'The input is email'
+                message: 'Email không đúng định dạng !'
             })
         } else if (password !== confirmPassword) {
             return res.status(200).json({
                 status: 'ERR',
-                message: 'The password is equal confirmPassword'
+                message: 'Mật khẩu xác nhận chưa khớp. Kiểm tra lại !'
             })
         }
         const response = await UserService.createUser(req.body)
@@ -39,12 +39,12 @@ const loginUser = async (req, res) => {
         if (!email || !password) {
             return res.status(200).json({
                 status: 'ERR',
-                message: 'The input is required'
+                message: 'Tài khoản không tồn tại !'
             })
         } else if (!isCheckEmail) {
             return res.status(200).json({
                 status: 'ERR',
-                message: 'The input is email'
+                message: 'Email không tồn tại'
             })
         }
         const response = await UserService.loginUser(req.body)
@@ -70,7 +70,7 @@ const updateUser = async (req, res) => {
         if (!userId) {
             return res.status(200).json({
                 status: 'ERR',
-                message: 'The userId is required'
+                message: 'Người dùng không tồn tại'
             })
         }
         const response = await UserService.updateUser(userId, data)
@@ -88,7 +88,7 @@ const deleteUser = async (req, res) => {
         if (!userId) {
             return res.status(200).json({
                 status: 'ERR',
-                message: 'The userId is required'
+                message: 'Không tìm thấy ID !'
             })
         }
         const response = await UserService.deleteUser(userId)
@@ -106,7 +106,7 @@ const deleteMany = async (req, res) => {
         if (!ids) {
             return res.status(200).json({
                 status: 'ERR',
-                message: 'The ids is required'
+                message: 'Không tìm thấy sản phẩm !'
             })
         }
         const response = await UserService.deleteManyUser(ids)
