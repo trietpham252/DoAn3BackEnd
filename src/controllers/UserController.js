@@ -9,7 +9,7 @@ const createUser = async (req, res) => {
         if (!email || !password || !confirmPassword) {
             return res.status(200).json({
                 status: 'ERR',
-                message: 'Vui lòng nhập đúng định dạng !'
+                message: 'Không được bỏ trống, nhập lại đầy đủ nhé !'
             })
         } else if (!isCheckEmail) {
             return res.status(200).json({
